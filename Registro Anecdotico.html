@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Anecdótico de Estudiante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .registro-anecdotico {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .form-group.inline {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group.inline > div {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .form-group.inline > div:last-child {
+            margin-right: 0;
+        }
+
+        button {
+            display: inline-block;
+            width: 48%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .new-record-btn {
+            background-color: #f44336;
+        }
+
+        button.new-record-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Encabezado */
+        .encabezado {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <div class="encabezado">
+        <p><strong>POLITÉCNICO RAFAELA MARRERO PAULINO</strong></p>
+        <p>Los Ángeles, Hato Mayor</p>
+        <p>Santiago, Rep. Dom.</p>
+        <p>Tel. (809) 471-2898</p>
+    </div>
+
+    <div class="registro-anecdotico">
+        <h2>Registro Anecdótico de Estudiante</h2>
+
+        <div class="form-group">
+            <label for="docente">Nombre del Docente:</label>
+            <input type="text" id="docente" name="docente">
+        </div>
+
+        <div class="form-group">
+            <label for="asignatura">Asignatura que imparte:</label>
+            <input type="text" id="asignatura" name="asignatura">
+        </div>
+
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha">
+        </div>
+
+        <div class="form-group inline">
+            <div>
+                <label for="curso">Curso:</label>
+                <input type="text" id="curso" name="curso">
+            </div>
+            <div>
+                <label for="numero">Número:</label>
+                <input type="number" id="numero" name="numero">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre-apellido">Nombre y Apellido:</label>
+            <input type="text" id="nombre-apellido" name="nombre-apellido">
+        </div>
+
+        <div class="form-group">
+            <label for="tareas">Cumple con las tareas:</label>
+            <select id="tareas" name="tareas">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="asistencia">Falta mucho a las clases:</label>
+            <select id="asistencia" name="asistencia">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="instrucciones">Acata instrucciones del docente:</label>
+            <select id="instrucciones" name="instrucciones">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+                <option value="a-veces">A veces</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="situacion">Situación observada:</label>
+            <textarea id="situacion" name="situacion" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="reaccion">Reacción del estudiante:</label>
+            <textarea id="reaccion" name="reaccion" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="recomendaciones">Recomendaciones futuras:</label>
+            <textarea id="recomendaciones" name="recomendaciones" rows="3"></textarea>
+        </div>
+
+        <div class="form-group inline">
+            <div>
+                <label for="lugar">Lugar:</label>
+                <input type="text" id="lugar" name="lugar">
+            </div>
+            <div>
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion-hecho">Descripción del hecho o incidente:</label>
+            <textarea id="descripcion-hecho" name="descripcion-hecho" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="observaciones">Observaciones:</label>
+            <textarea id="observaciones" name="observaciones" rows="3"></textarea>
+        </div>
+
+        <button type="button" onclick="exportarPDF()">Exportar a PDF</button>
+        <button type="button" class="new-record-btn" onclick="nuevoRegistro()">Nuevo Registro</button>
+    </div>
+
+    <!-- Script jsPDF y jsPDF-AutoTable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function exportarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Agregar encabezado
+            doc.setFontSize(12);
+            doc.text("POLITÉCNICO RAFAELA MARRERO PAULINO", 105, 10, { align: 'center' });
+            doc.text("Los Ángeles, Hato Mayor", 105, 16, { align: 'center' });
+            doc.text("Santiago, Rep. Dom.", 105, 22, { align: 'center' });
+            doc.text("Tel. (809) 471-2898", 105, 28, { align: 'center' });
+
+            // Subtítulo "REGISTRO ANECDÓTICO" en mayúsculas y color negro oscuro
+            doc.setFontSize(14);
+            doc.setTextColor(33, 33, 33);  // Color negro oscuro
+            doc.text("REGISTRO ANECDÓTICO", 105, 40, { align: 'center' });
+
+            // Datos para la tabla
+            const tableData = [
+                ["Campo", "Valor"],
+                ["Docente", document.getElementById("docente").value],
+                ["Asignatura", document.getElementById("asignatura").value],
+                ["Fecha", document.getElementById("fecha").value],
+                ["Curso", document.getElementById("curso").value],
+                ["Número", document.getElementById("numero").value],
+                ["Nombre y Apellido", document.getElementById("nombre-apellido").value],
+                ["Cumple con las tareas", document.getElementById("tareas").value],
+                ["Falta mucho a las clases", document.getElementById("asistencia").value],
+                ["Acata instrucciones del docente", document.getElementById("instrucciones").value],
+                ["Situación observada", document.getElementById("situacion").value],
+                ["Reacción del estudiante", document.getElementById("reaccion").value],
+                ["Recomendaciones futuras", document.getElementById("recomendaciones").value],
+                ["Lugar", document.getElementById("lugar").value],
+                ["Hora", document.getElementById("hora").value],
+                ["Descripción del hecho o incidente", document.getElementById("descripcion-hecho").value],
+                ["Observaciones", document.getElementById("observaciones").value],
+            ];
+
+            // Agregar tabla
+            doc.autoTable({
+                head: [tableData[0]], // Encabezados de la tabla
+                body: tableData.slice(1), // Datos de la tabla
+                startY: 50, // Y de inicio
+                theme: 'grid',
+            });
+
+            // Guardar PDF
+            doc.save("registro_anecdótico.pdf");
+        }
+
+        function nuevoRegistro() {
+            // Funcionalidad para limpiar el formulario (opcional)
+            document.querySelector(".registro-anecdotico").reset();
+        }
+    </script>
+</body>
+</html>
